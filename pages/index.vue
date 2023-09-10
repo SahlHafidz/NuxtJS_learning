@@ -18,25 +18,23 @@
       {{ isGrid ? 'Grid' : 'List' }}
       </button>
     </div>
-    <div class="dropdown ms-2">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown link
-  </a>
-
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
     </div>
+    <div class="form-floating">
+  <select class="form-select ps-5 pe-5" required name="category" v-model="dropdown" aria-label="Floating label select example">
+    <label  for="floatingSelect">Works with selects</label>
+    <option value="task">task</option>
+    <option value="tugas">tugas</option>
+    <option value="kerja">kerja</option>
+  </select>
+  <label for="floatingSelect">Works with selects</label>
+</div>
   </div>
   <div class="list-task row">
-    <!-- <CardItem :task="tasks[0]" :isGrid="isGrid"  />
+    <!-- <CardItem :task="tasks[0]" :isGrid="isGrid" />
     <CardItem :task="tasks[1]" :isGrid="isGrid" />
     <CardItem :task="tasks[2]" :isGrid="isGrid" /> -->
     <CardItem
-    v-for="(task, i) in resultQuery"
+    v-for="(task, i) in resultdropdown "
     :key="i"
     :task="task"
     :isGrid="isGrid"
@@ -64,9 +62,7 @@
     </div>
   </div>
   </div>
-  
-</div>
-  
+  </div>
 </template>
 <script>
 import CardItem from "@/components/Card/CardItem.vue"
@@ -77,14 +73,20 @@ export default {
   components: {
     CardItem
   },
+  
   data() {
     return {
       searchQuery: '',
-      // Tipe layout daftar task
+      dropdown:null,
+      
+      // onchange(e){
+      //   dropdown=e.target.value;
+      // },
+      
+      // Tipe layout d  aftar task
       isGrid: true,
       // Status saat menambahkan task
       isCreating: false,
-      
       // Daftar task
       tasks: [
         {
@@ -92,53 +94,51 @@ export default {
           description: 'ini deskripsi 1',
           isDone: false,
           category:'task',
-    
         },
         {
           title: 'Tugas 2',
           description: 'ini deskripsi 2',
           isDone: false,
           category:'tugas',
-          
         },
         {
           title: 'Kerja 3',
           description: 'ini deskripsi 3',
           isDone: false,
           category:'kerja',
-          
         },
       ]
     }
   },
   computed: {
-    resultQuery() {
-      if (this.searchQuery) {
+    // resultQuery() {
+    //   if (this.searchQuery) {
+    //     return this.tasks.filter((item) => {
+    //       return this.searchQuery
+    //       .toLowerCase()
+    //       .split(" ")
+    //       .every((v) => item.title.toLowerCase().includes(v));
+    //     });
+    //   } else {
+    //     console.log(this.tasks)
+    //     return this.tasks
+    //   }
+    // },
+    resultdropdown(){
+      if (this.dropdown) {
         return this.tasks.filter((item) => {
-          return this.searchQuery
+          return this.dropdown
           .toLowerCase()
           .split(" ")
-          .every((v) => item.title.toLowerCase().includes(v));
+          .every((v) => item.category.toLowerCase().includes(v));
         });
       } else {
         console.log(this.tasks)
         return this.tasks
       }
-    },
-    // kategori(){
-    //   if(this.tasks.category==='task'){
-    //     valcategory=true;
-    //   }
-    //   else{
-    //     valcategory=false
-    //   }
-
-    // }
+}
   }
 }
 </script>
 <style>
-.invisible{
-  visibility: hidden;
-}
 </style>
