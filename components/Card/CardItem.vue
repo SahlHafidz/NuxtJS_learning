@@ -1,4 +1,5 @@
 <template>
+    
     <div
         :class="[
         'item-task d-flex align-items-start border-bottom pt-3 pb-4',
@@ -23,7 +24,11 @@
             <div class="description-task small text-muted">
                 {{ task.description }}
             </div>
+            <div class="description-task small text-muted">
+                {{ task.category }}
+            </div>
         </div>
+        
     </div>
 </template>
 <script>

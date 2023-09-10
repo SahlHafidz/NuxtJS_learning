@@ -18,12 +18,23 @@
       {{ isGrid ? 'Grid' : 'List' }}
       </button>
     </div>
+    <div class="dropdown ms-2">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a>
+
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
     </div>
   </div>
   <div class="list-task row">
-    <CardItem :task="tasks[0]" :isGrid="isGrid" />
+    <!-- <CardItem :task="tasks[0]" :isGrid="isGrid"  />
     <CardItem :task="tasks[1]" :isGrid="isGrid" />
-    <CardItem :task="tasks[2]" :isGrid="isGrid" />
+    <CardItem :task="tasks[2]" :isGrid="isGrid" /> -->
     <CardItem
     v-for="(task, i) in resultQuery"
     :key="i"
@@ -53,7 +64,9 @@
     </div>
   </div>
   </div>
-  </div>
+  
+</div>
+  
 </template>
 <script>
 import CardItem from "@/components/Card/CardItem.vue"
@@ -71,22 +84,29 @@ export default {
       isGrid: true,
       // Status saat menambahkan task
       isCreating: false,
+      
       // Daftar task
       tasks: [
         {
           title: 'Task 1',
           description: 'ini deskripsi 1',
           isDone: false,
+          category:'task',
+    
         },
         {
           title: 'Tugas 2',
           description: 'ini deskripsi 2',
           isDone: false,
+          category:'tugas',
+          
         },
         {
           title: 'Kerja 3',
           description: 'ini deskripsi 3',
           isDone: false,
+          category:'kerja',
+          
         },
       ]
     }
@@ -104,9 +124,21 @@ export default {
         console.log(this.tasks)
         return this.tasks
       }
-    }
+    },
+    // kategori(){
+    //   if(this.tasks.category==='task'){
+    //     valcategory=true;
+    //   }
+    //   else{
+    //     valcategory=false
+    //   }
+
+    // }
   }
 }
 </script>
 <style>
+.invisible{
+  visibility: hidden;
+}
 </style>
